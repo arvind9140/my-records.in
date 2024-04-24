@@ -64,7 +64,7 @@ export const sendOtp = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Name should contain only alphabets and length should be greater than 2");
     }
     else if (!onlyDateOfBirthValidation(dob)) {
-        throw new ApiError(400, "Date of birth should be in YYYY-MM-DD format");
+        throw new ApiError(400, "Date of birth should be in DD-MM-YYYY format");
     }
 
     else if (email) {
