@@ -81,14 +81,14 @@ export const sendOtp = asyncHandler(async (req, res) => {
     {
         throw new ApiError(400, "Blood group should contain only alphabets and length should be greater than 2");
     }
-    else if(!onlyAddressValidation(address))
-    {
-        throw new ApiError(400, "Address should contain all alphabets, digit, slash"); 
-    }
-    else if(address.length > 5)
-    {
-        throw new ApiError(400, "Address should contain minimum 5 length");
-    }
+    // else if(!onlyAddressValidation(address))
+    // {
+    //     throw new ApiError(400, "Address should contain all alphabets, digit, slash"); 
+    // }
+    // else if(address.length > 5)
+    // {
+    //     throw new ApiError(400, "Address should contain minimum 5 length");
+    // }
   
     else if (!onlyNumberValidation(pincode) || pincode.length !== 6) {
         throw new ApiError(400, "Pincode should be in correct format");
