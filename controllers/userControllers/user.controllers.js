@@ -3,7 +3,7 @@ import { ApiResponse } from "../../utils/apiResponse.js";
 import { ApiError } from "../../utils/apiError.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 import { onlyAddressValidation, onlyAlphabetsValidation, onlyBloodGroupValidation, onlyDateOfBirthValidation, onlyEmailValidation, onlyNumberValidation, onlyPasswordPatternValidation, } from "../../utils/validation.js";
-import twilio from 'twilio';
+// import twilio from 'twilio';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 
@@ -51,13 +51,11 @@ export const sendOtp = asyncHandler(async (req, res) => {
     const gender = req.body.gender;
     const blood_group = req.body.blood_group;
     const address = req.body.address;
-    // const locality = req.body.locality;
-    // const city = req.body.city;
-    // const state = req.body.state;
     const pincode = req.body.pincode;
     const occupation = req.body.occupation;
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
+  
 
 
     if (!onlyAlphabetsValidation(name) && name.length > 2) {
@@ -78,10 +76,7 @@ export const sendOtp = asyncHandler(async (req, res) => {
     else if (!onlyAlphabetsValidation(gender) && gender.length > 2) {
         throw new ApiError(400, "Gender should contain only alphabets and length should be greater than 2");
     }
-    // else if (!locality) {
-    //     throw new ApiError(400, "Locality is required");
-
-    // }
+    
     else if(!onlyBloodGroupValidation(blood_group))
     {
         throw new ApiError(400, "Blood group should contain only alphabets and length should be greater than 2");
@@ -90,13 +85,12 @@ export const sendOtp = asyncHandler(async (req, res) => {
     {
         throw new ApiError(400, "Address should contain all alphabets, digit, slash"); 
     }
-    // else if (!onlyAlphabetsValidation(city)) {
-    //     throw new ApiError(400, "City should contain only alphabets");
-    // }
-    // else if (!onlyAlphabetsValidation(state)) {
-    //     throw new ApiError(400, "State should contain only alphabets");
-    // }
-    else if (!onlyNumberValidation(pincode) && pincode.length == 6) {
+    else if(address.length > 5)
+    {
+        throw new ApiError(400, "Address should contain minimum 5 length");
+    }
+  
+    else if (!onlyNumberValidation(pincode) || pincode.length !== 6) {
         throw new ApiError(400, "Pincode should be in correct format");
 
     }
@@ -105,9 +99,9 @@ export const sendOtp = asyncHandler(async (req, res) => {
             throw new ApiError(400, "Occupation should contain only alphabets");
         }
     }
-    else if (!onlyPasswordPatternValidation(password) && password.length >= 8) {
-        throw new ApiError(400, "Password should contain atleast one uppercase, one lowercase, one special character and one number");
-    }
+    else if (!onlyPasswordPatternValidation(password)) {
+        throw new ApiError(400, "Password should contain at least one uppercase letter, one lowercase letter, one special character, and one number and minimum length is 8 ");
+    } 
     else if (!(password === confirmPassword)) {
         throw new ApiError(400, "Password and Confirm Password should be same");
 
@@ -131,10 +125,8 @@ export const sendOtp = asyncHandler(async (req, res) => {
             occupation: occupation,
             Address: {
                 address: address,
-                // locality: locality,
-                // city: city,
                 pincode: pincode,
-                // state: state,
+               
             },
 
         })

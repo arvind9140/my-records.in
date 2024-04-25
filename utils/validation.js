@@ -43,15 +43,14 @@ export const onlyDateOfBirthValidation = (dob) => {
 
 
 
-export const onlyAddressValidation = (Address) => {
-    const addressRegex = /^[a-zA-Z0-9\s,'-.]*$/;
+export const onlyAddressValidation = (address) => {
+    // Updated regular expression to ensure address starts with a character or digit and doesn't start with a space
+    const addressRegex = /^[a-zA-Z0-9][a-zA-Z0-9\s,'-.]*$/;
 
-
-    if (addressRegex.test(Address)) {
+    if (addressRegex.test(address)) {
         return true;
     }
     return false;
-
 }
 export const onlyBloodGroupValidation = (Blood) => {
     const bloodGroupRegex = /^(A|B|AB|O)[+-]$/;
