@@ -65,11 +65,11 @@ export const sendOtp = asyncHandler(async (req, res) => {
     //     throw new ApiError(400, "Date of birth should be in DD-MM-YYYY format");
     // }
 
-    else if (email) {
-        if (!onlyEmailValidation(email)) {
-            throw new ApiError(400, "Email should be in correct format");
-        }
-    }
+    // else if (email) {
+    //     if (!onlyEmailValidation(email)) {
+    //         throw new ApiError(400, "Email should be in correct format");
+    //     }
+    // }
     else if (!onlyNumberValidation(phone) || phone.length !== 10) {
         throw new ApiError(400, "Phone number should be in correct");
     }
