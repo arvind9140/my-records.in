@@ -36,7 +36,7 @@ export const contactUs = asyncHandler(async (req, res) => {
     else{
         const mailOptions = {
             from: email,
-            to: 'rmaurya@initializ.io',
+            to: 'contact@my-records.in',
             subject: 'New Query From My-Records.in',
             html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html lang="en">
